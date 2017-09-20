@@ -1,6 +1,6 @@
 {
   "name": "nanofp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.es.js",
   "repository": "https://github.com/twilson63/nanofp",
@@ -22,7 +22,9 @@
   "babel": {
     "env": {
       "test": {
-        "presets": ["env"]
+        "presets": [
+          "env"
+        ]
       },
       "production": {
         "presets": [
