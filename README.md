@@ -1,4 +1,4 @@
-# nano-fp
+# nanofp
 
 A tiny fp utils library
 
