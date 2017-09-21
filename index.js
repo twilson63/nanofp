@@ -21,7 +21,21 @@ export const contains = curry((exp, source) => {
   return reg.test(source)
 })
 export const noop = () => null
+// declarative expression for true && <h1>Beep</h1>
+export const asif = curry(function(compare, success) {
+  return function(...args) {
+    return compare.apply(null, args) ? success.apply(null, args) : null
+  }
+})
+// ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
 
+export const ifElse = curry(function(compare, success, failure) {
+  return function(...args) {
+    return compare.apply(null, args)
+      ? success.apply(null, args)
+      : failure.apply(null, args)
+  }
+})
 // ---- Internal Functions
 
 // Core Curry Functions

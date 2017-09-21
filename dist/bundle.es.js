@@ -81,7 +81,27 @@ var contains = curry(function (exp, source) {
 var noop = function noop() {
   return null;
 };
+// declarative expression for true && <h1>Beep</h1>
+var asif = curry(function (compare, success) {
+  return function () {
+    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+      args[_key4] = arguments[_key4];
+    }
 
+    return compare.apply(null, args) ? success.apply(null, args) : null;
+  };
+});
+// ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
+
+var ifElse = curry(function (compare, success, failure) {
+  return function () {
+    for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+      args[_key5] = arguments[_key5];
+    }
+
+    return compare.apply(null, args) ? success.apply(null, args) : failure.apply(null, args);
+  };
+});
 // ---- Internal Functions
 
 // Core Curry Functions
@@ -114,8 +134,8 @@ function _curry(length, received, fn) {
     return fn.apply(null, received);
   }
   return function () {
-    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-      args[_key4] = arguments[_key4];
+    for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+      args[_key6] = arguments[_key6];
     }
 
     var combined = received.concat(args);
@@ -124,4 +144,4 @@ function _curry(length, received, fn) {
   };
 }
 
-export { curry, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, and, or, contains, noop };
+export { curry, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, and, or, contains, noop, asif, ifElse };
