@@ -4,6 +4,8 @@
 	(factory((global.nanofp = {})));
 }(this, (function (exports) { 'use strict';
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var curry = function curry(fn) {
@@ -116,6 +118,21 @@ var merge = function merge() {
 
   return Object.assign.apply(null, [{}].concat(objs));
 };
+var keys = function keys(obj) {
+  return Object.keys(obj);
+};
+var assoc = function assoc(k, v, obj) {
+  return merge(obj, _defineProperty({}, k, v));
+};
+// export const lens = curry((getter, setter) => {
+//   return toFunctorFn => {
+//     return target => {
+//       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
+//     }
+//   }
+// })
+// export const lensProp = k => noop
+// export const set = (lensKey, value, obj) => noop
 // ---- Internal Functions
 
 // Core Curry Functions
@@ -179,6 +196,8 @@ exports.noop = noop;
 exports.asif = asif;
 exports.ifElse = ifElse;
 exports.merge = merge;
+exports.keys = keys;
+exports.assoc = assoc;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

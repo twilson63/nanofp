@@ -38,6 +38,17 @@ export const ifElse = curry(function(compare, success, failure) {
 })
 
 export const merge = (...objs) => Object.assign.apply(null, [{}, ...objs])
+export const keys = obj => Object.keys(obj)
+export const assoc = (k, v, obj) => merge(obj, { [k]: v })
+// export const lens = curry((getter, setter) => {
+//   return toFunctorFn => {
+//     return target => {
+//       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
+//     }
+//   }
+// })
+// export const lensProp = k => noop
+// export const set = (lensKey, value, obj) => noop
 // ---- Internal Functions
 
 // Core Curry Functions
