@@ -102,6 +102,14 @@ var ifElse = curry(function (compare, success, failure) {
     return compare.apply(null, args) ? success.apply(null, args) : failure.apply(null, args);
   };
 });
+
+var merge = function merge() {
+  for (var _len6 = arguments.length, objs = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+    objs[_key6] = arguments[_key6];
+  }
+
+  return Object.assign.apply(null, [{}].concat(objs));
+};
 // ---- Internal Functions
 
 // Core Curry Functions
@@ -134,8 +142,8 @@ function _curry(length, received, fn) {
     return fn.apply(null, received);
   }
   return function () {
-    for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-      args[_key6] = arguments[_key6];
+    for (var _len7 = arguments.length, args = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+      args[_key7] = arguments[_key7];
     }
 
     var combined = received.concat(args);
@@ -144,4 +152,4 @@ function _curry(length, received, fn) {
   };
 }
 
-export { curry, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, and, or, contains, noop, asif, ifElse };
+export { curry, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, and, or, contains, noop, asif, ifElse, merge };

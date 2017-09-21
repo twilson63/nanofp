@@ -36,6 +36,8 @@ export const ifElse = curry(function(compare, success, failure) {
       : failure.apply(null, args)
   }
 })
+
+export const merge = (...objs) => Object.assign.apply(null, [{}, ...objs])
 // ---- Internal Functions
 
 // Core Curry Functions
