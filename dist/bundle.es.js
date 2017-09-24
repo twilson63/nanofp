@@ -6,13 +6,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var verify = function verify(a, b, name) {
   if (a !== b) {
-    throw new Error('Invalid argument passed to ' + (name || 'function') + ', it should be a ' + b);
+    throw new Error('\n*************************************************************\n* nanofp Error: Invalid argument for the function ' + (name || 'undefined') + '\n*************************************************************\n*  It looks like you may have passed an invalid argument\n*  This function was looking for a input of type ' + b + '\n*\n*  For more information visit:\n*\n*  https://github.com/twilson63/nanofp/docs.md#' + (name || 'undefined') + '\n*\n*************************************************************\n');
   }
   return undefined;
 };
 
 var curry = function curry(fn) {
-  verify(typeof fn === 'undefined' ? 'undefined' : _typeof(fn), 'function', 'nanofp.curry');
+  verify(typeof fn === 'undefined' ? 'undefined' : _typeof(fn), 'function', 'curry');
   return function () {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -38,17 +38,17 @@ var isNil = function isNil(v) {
 };
 
 var not = function not(v) {
-  verify(isNil(v), false, 'nanofp.not');
+  verify(isNil(v), false, 'not');
   return !v;
 };
 
 var identity = function identity(v) {
-  verify(isNil(v), false, 'nanofp.identity');
+  verify(isNil(v), false, 'identity');
   return v;
 };
 
 var always = function always(v) {
-  verify(isNil(v), false, 'nanofp.always');
+  verify(isNil(v), false, 'always');
   return function () {
     return v;
   };
@@ -58,31 +58,31 @@ var equals = curry(function (a, b) {
   return a === b;
 });
 var prop = curry(function (p, obj) {
-  verify(type(p), 'String', 'nanofp.prop');
-  verify(type(obj), 'Object', 'nanofp.prop');
+  verify(type(p), 'String', 'prop');
+  verify(type(obj), 'Object', 'prop');
   return obj[p];
 });
 
 var reduce = curry(function (fn, v, list) {
-  verify(type(fn), 'Function', 'nanofp.reduce');
-  verify(type(list), 'Array', 'nanofp.reduce');
+  verify(type(fn), 'Function', 'reduce');
+  verify(type(list), 'Array', 'reduce');
 
   return list.reduce(fn, v);
 });
 
 var map = curry(function (fn, list) {
-  verify(type(fn), 'Function', 'nanofp.map');
-  verify(type(list), 'Array', 'nanofp.map');
+  verify(type(fn), 'Function', 'map');
+  verify(type(list), 'Array', 'map');
   return list.map(fn, list);
 });
 var filter = curry(function (fn, list) {
-  verify(type(fn), 'Function', 'nanofp.filter');
-  verify(type(list), 'Array', 'nanofp.filter');
+  verify(type(fn), 'Function', 'filter');
+  verify(type(list), 'Array', 'filter');
   return list.filter(fn, list);
 });
 
 var invoke = function invoke(v, fn) {
-  verify(type(fn), 'Function', 'nanofp.invoke');
+  verify(type(fn), 'Function', 'invoke');
   return fn(v);
 };
 
@@ -93,7 +93,7 @@ var compose = function compose() {
 
   // should be array of unairy functions
   map(function (fn) {
-    return verify(type(fn), 'Function', 'nanofp.compose');
+    return verify(type(fn), 'Function', 'compose');
   }, fns);
 
   return function (v) {
@@ -107,7 +107,7 @@ var concat = function concat() {
   }
 
   map(function (arr) {
-    return verify(type(arr), 'Array', 'nanofp.concat');
+    return verify(type(arr), 'Array', 'concat');
   }, arrs);
 
   return reduce(function (a, b) {
@@ -116,22 +116,22 @@ var concat = function concat() {
 };
 
 var path = curry(function (keys, obj) {
-  verify(type(keys), 'Array', 'nanofp.path');
-  verify(type(obj), 'Object', 'nanofp.path');
+  verify(type(keys), 'Array', 'path');
+  verify(type(obj), 'Object', 'path');
   return reduce(function (o, p) {
     return o[p];
   }, obj, keys);
 });
 
 var pluck = curry(function (key, list) {
-  verify(type(key), 'String', 'nanofp.pluck');
-  verify(type(list), 'Array', 'nanofp.pluck');
+  verify(type(key), 'String', 'pluck');
+  verify(type(list), 'Array', 'pluck');
 
   return map(prop(key), list);
 });
 
 var contains = curry(function (exp, source) {
-  verify(type(source), 'String', 'nanofp.contains');
+  verify(type(source), 'String', 'contains');
   var reg = new RegExp('' + exp, 'i');
   return reg.test(source);
 });
@@ -141,8 +141,8 @@ var noop = function noop() {
 };
 // declarative expression for true && <h1>Beep</h1>
 var asif = curry(function (compare, success) {
-  verify(type(compare), 'Function', 'nanofp.asif');
-  verify(type(success), 'Function', 'nanofp.asif');
+  verify(type(compare), 'Function', 'asif');
+  verify(type(success), 'Function', 'asif');
 
   return function () {
     return compare.apply(undefined, arguments) ? success.apply(undefined, arguments) : null;
@@ -151,9 +151,9 @@ var asif = curry(function (compare, success) {
 // ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
 
 var ifElse = curry(function (compare, success, failure) {
-  verify(type(compare), 'Function', 'nanofp.ifElse');
-  verify(type(success), 'Function', 'nanofp.ifElse');
-  verify(type(failure), 'Function', 'nanofp.ifElse');
+  verify(type(compare), 'Function', 'ifElse');
+  verify(type(success), 'Function', 'ifElse');
+  verify(type(failure), 'Function', 'ifElse');
 
   return function () {
     return compare.apply(undefined, arguments) ? success.apply(undefined, arguments) : failure.apply(undefined, arguments);
@@ -166,24 +166,24 @@ var merge = function merge() {
   }
 
   map(function (o) {
-    verify(type(o), 'Object', 'nanofp.merge');
+    verify(type(o), 'Object', 'merge');
   }, objs);
   return Object.assign.apply(Object, objs);
 };
 
 var keys = function keys(obj) {
-  verify(type(obj), 'Object', 'nanofp.keys');
+  verify(type(obj), 'Object', 'keys');
   return Object.keys(obj);
 };
 
 var values = function values(obj) {
-  verify(type(obj), 'Object', 'nanofp.values');
+  verify(type(obj), 'Object', 'values');
   return Object.values(obj);
 };
 
 var assoc = function assoc(k, v, obj) {
-  verify(type(obj), 'Object', 'nanofp.assoc');
-  verify(type(k), 'String', 'nanofp.assoc');
+  verify(type(obj), 'Object', 'assoc');
+  verify(type(k), 'String', 'assoc');
 
   return merge(obj, _defineProperty({}, k, v));
 };
