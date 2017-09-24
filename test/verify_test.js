@@ -2,6 +2,7 @@ import test from 'tape'
 import { map } from '../'
 
 test('verify', t => {
+  //map('Beep', [1, 2, 3, 4])
   try {
     map('Beep', [1, 2, 3, 4])
   } catch (err) {
@@ -16,7 +17,7 @@ test('verify', t => {
 *
 *  For more information visit:
 *
-*  https://github.com/twilson63/nanofp/docs.md#map
+*  https://github.com/twilson63/nanofp/blob/master/docs.md#map
 *
 *************************************************************
 `
