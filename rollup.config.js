@@ -1,13 +1,12 @@
 import babel from 'rollup-plugin-babel'
-import builtins from 'rollup-plugin-node-builtins'
 
 export default {
   input: 'index.js',
+
   plugins: [
     babel({
       exclude: 'node_modules/**'
-    }),
-    builtins()
+    })
   ],
   output: [
     { file: 'dist/bundle.cjs.js', format: 'cjs' },

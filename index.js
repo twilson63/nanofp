@@ -1,7 +1,14 @@
-import assert from 'assert'
+const verify = function(a, b, name) {
+  if (a !== b) {
+    throw new Error(
+      `Invalid argument passed to ${name || 'function'}, it should be a ${b}`
+    )
+  }
+  return undefined
+}
 
 export const curry = function(fn) {
-  assert.equal(typeof fn, 'function')
+  verify(typeof fn, 'function', 'nanofp.curry')
   return function(...args) {
     return _curry(fn.length, args, fn)
   }
@@ -23,17 +30,17 @@ export const isNil = function(v) {
 }
 
 export const not = function(v) {
-  assert.equal(isNil(v), false)
+  verify(isNil(v), false, 'nanofp.not')
   return !v
 }
 
 export const identity = function(v) {
-  assert.equal(isNil(v), false)
+  verify(isNil(v), false, 'nanofp.identity')
   return v
 }
 
 export const always = function(v) {
-  assert.equal(isNil(v), false)
+  verify(isNil(v), false, 'nanofp.always')
   return function() {
     return v
   }
@@ -41,38 +48,38 @@ export const always = function(v) {
 
 export const equals = curry((a, b) => a === b)
 export const prop = curry(function(p, obj) {
-  assert.equal(type(p), 'String')
-  assert.equal(type(obj), 'Object')
+  verify(type(p), 'String', 'nanofp.prop')
+  verify(type(obj), 'Object', 'nanofp.prop')
   return obj[p]
 })
 
 export const reduce = curry(function(fn, v, list) {
-  assert.equal(type(fn), 'Function')
-  assert.equal(type(list), 'Array')
+  verify(type(fn), 'Function', 'nanofp.reduce')
+  verify(type(list), 'Array', 'nanofp.reduce')
 
   return list.reduce(fn, v)
 })
 
 export const map = curry(function(fn, list) {
-  assert.equal(type(fn), 'Function')
-  assert.equal(type(list), 'Array')
+  verify(type(fn), 'Function', 'nanofp.map')
+  verify(type(list), 'Array', 'nanofp.map')
   return list.map(fn, list)
 })
 export const filter = curry(function(fn, list) {
-  assert.equal(type(fn), 'Function')
-  assert.equal(type(list), 'Array')
+  verify(type(fn), 'Function', 'nanofp.filter')
+  verify(type(list), 'Array', 'nanofp.filter')
   return list.filter(fn, list)
 })
 
 const invoke = function(v, fn) {
-  assert.equal(type(fn), 'Function')
+  verify(type(fn), 'Function', 'nanofp.invoke')
   return fn(v)
 }
 
 export const compose = function(...fns) {
   // should be array of unairy functions
   map(function(fn) {
-    return assert.equal(type(fn), 'Function')
+    return verify(type(fn), 'Function', 'nanofp.compose')
   }, fns)
 
   return function(v) {
@@ -82,27 +89,27 @@ export const compose = function(...fns) {
 
 export const concat = function(...arrs) {
   map(function(arr) {
-    return assert.equal(type(arr), 'Array')
+    return verify(type(arr), 'Array', 'nanofp.concat')
   }, arrs)
 
   return reduce((a, b) => [...a, ...b], [], arrs)
 }
 
 export const path = curry(function(keys, obj) {
-  assert.equal(type(keys), 'Array')
-  assert.equal(type(obj), 'Object')
+  verify(type(keys), 'Array', 'nanofp.path')
+  verify(type(obj), 'Object', 'nanofp.path')
   return reduce((o, p) => o[p], obj, keys)
 })
 
 export const pluck = curry(function(key, list) {
-  assert.equal(type(key), 'String')
-  assert.equal(type(list), 'Array')
+  verify(type(key), 'String', 'nanofp.pluck')
+  verify(type(list), 'Array', 'nanofp.pluck')
 
   return map(prop(key), list)
 })
 
 export const contains = curry(function(exp, source) {
-  assert.equal(type(source), 'String')
+  verify(type(source), 'String', 'nanofp.contains')
   const reg = new RegExp(`${exp}`, 'i')
   return reg.test(source)
 })
@@ -110,8 +117,8 @@ export const contains = curry(function(exp, source) {
 export const noop = () => null
 // declarative expression for true && <h1>Beep</h1>
 export const asif = curry(function(compare, success) {
-  assert.equal(type(compare), 'Function')
-  assert.equal(type(success), 'Function')
+  verify(type(compare), 'Function', 'nanofp.asif')
+  verify(type(success), 'Function', 'nanofp.asif')
 
   return function(...args) {
     return compare(...args) ? success(...args) : null
@@ -120,9 +127,9 @@ export const asif = curry(function(compare, success) {
 // ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
 
 export const ifElse = curry(function(compare, success, failure) {
-  assert.equal(type(compare), 'Function')
-  assert.equal(type(success), 'Function')
-  assert.equal(type(failure), 'Function')
+  verify(type(compare), 'Function', 'nanofp.ifElse')
+  verify(type(success), 'Function', 'nanofp.ifElse')
+  verify(type(failure), 'Function', 'nanofp.ifElse')
 
   return function(...args) {
     return compare(...args) ? success(...args) : failure(...args)
@@ -131,18 +138,24 @@ export const ifElse = curry(function(compare, success, failure) {
 
 export const merge = function(...objs) {
   map(function(o) {
-    assert.equal(type(o), 'Object')
+    verify(type(o), 'Object', 'nanofp.merge')
   }, objs)
   return Object.assign(...objs)
 }
+
 export const keys = function(obj) {
-  assert.equal(type(obj), 'Object')
+  verify(type(obj), 'Object', 'nanofp.keys')
   return Object.keys(obj)
 }
 
+export const values = function(obj) {
+  verify(type(obj), 'Object', 'nanofp.values')
+  return Object.values(obj)
+}
+
 export const assoc = function(k, v, obj) {
-  assert.equal(type(obj), 'Object')
-  assert.equal(type(k), 'String')
+  verify(type(obj), 'Object', 'nanofp.assoc')
+  verify(type(k), 'String', 'nanofp.assoc')
 
   return merge(obj, { [k]: v })
 }
@@ -185,6 +198,7 @@ function _arity(n, fn) {
       )
   }
 }
+
 function _curry(length, received, fn) {
   if (length === received.length) {
     return fn(...received)
