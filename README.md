@@ -6,9 +6,25 @@ Currently this is an experimental library, if you are looking for a production f
 
 This library is mainly used for teaching functional javascript core concepts and should be used to prototype or learn with.
 
-## Building for the browser
+## Focus
 
-If building for browser - use unassert to remove asserts.
+This library's focus is clear error messages that really help new developers to use functional programming libraries.
+
+When an error occurs you should get a clear message in the browser:
+
+![error](console-error.png)
+
+And the link should to take you to easy to understand documentation.
+
+![docs](docs.png)
+
+If you find the documentation needs improving please provide a pull request correcting the documentation or file an issue explaining why you are struggling with the library. This will help tremendously to make it better and more user friendly and approachable.
+
+All of the documentation is in the [docs.md](docs.md) file and written in markdown, so it should be very easy to contribute to right inside github.
+
+## Feedback
+
+Please provide feedback about the library
 
 ## LICENSE
 
