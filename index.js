@@ -9,7 +9,8 @@ const verify = function(a, b, name) {
 *
 *  For more information visit:
 *
-*  https://github.com/twilson63/nanofp/docs.md#${name || 'undefined'}
+*  https://github.com/twilson63/nanofp/blob/master/docs.md#${name ||
+      'undefined'}
 *
 *************************************************************
 `)

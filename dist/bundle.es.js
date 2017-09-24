@@ -6,7 +6,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var verify = function verify(a, b, name) {
   if (a !== b) {
-    throw new Error('\n*************************************************************\n* nanofp Error: Invalid argument for the function ' + (name || 'undefined') + '\n*************************************************************\n*  It looks like you may have passed an invalid argument\n*  This function was looking for a input of type ' + b + '\n*\n*  For more information visit:\n*\n*  https://github.com/twilson63/nanofp/docs.md#' + (name || 'undefined') + '\n*\n*************************************************************\n');
+    throw new Error('\n*************************************************************\n* nanofp Error: Invalid argument for the function ' + (name || 'undefined') + '\n*************************************************************\n*  It looks like you may have passed an invalid argument\n*  This function was looking for a input of type ' + b + '\n*\n*  For more information visit:\n*\n*  https://github.com/twilson63/nanofp/blob/master/docs.md#' + (name || 'undefined') + '\n*\n*************************************************************\n');
   }
   return undefined;
 };
