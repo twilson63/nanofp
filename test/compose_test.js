@@ -2,7 +2,7 @@ import { compose, map, filter } from '../'
 import test from 'tape'
 import converter from 'number-to-words'
 
-test('reduce', t => {
+test('compose', t => {
   t.plan(1)
   const isOdd = a => a % 2 === 1
   const data = [1, 2, 3, 4, 5, 6, 7]

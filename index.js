@@ -1,7 +1,7 @@
 import assert from 'assert'
 
 export const curry = function(fn) {
-  assert.equals(typeof fn, 'function')
+  assert.equal(typeof fn, 'function')
   return function(...args) {
     return _curry(fn.length, args, fn)
   }
@@ -23,17 +23,17 @@ export const isNil = function(v) {
 }
 
 export const not = function(v) {
-  assert.equals(isNil(v), false)
+  assert.equal(isNil(v), false)
   return !v
 }
 
 export const identity = function(v) {
-  assert.equals(isNil(v), false)
+  assert.equal(isNil(v), false)
   return v
 }
 
 export const always = function(v) {
-  assert.equals(isNil(v), false)
+  assert.equal(isNil(v), false)
   return function() {
     return v
   }
@@ -41,37 +41,38 @@ export const always = function(v) {
 
 export const equals = curry((a, b) => a === b)
 export const prop = curry(function(p, obj) {
-  assert.equals(type(p), 'String')
-  assert.equals(type(obj), 'Object')
+  assert.equal(type(p), 'String')
+  assert.equal(type(obj), 'Object')
   return obj[p]
 })
 
 export const reduce = curry(function(fn, v, list) {
-  assert.equals(type(fn), 'Function')
-  assert.equals(type(list), 'Array')
+  assert.equal(type(fn), 'Function')
+  assert.equal(type(list), 'Array')
 
   return list.reduce(fn, v)
 })
 
 export const map = curry(function(fn, list) {
-  assert.equals(type(fn), 'Function')
-  assert.equals(type(list), 'Array')
+  assert.equal(type(fn), 'Function')
+  assert.equal(type(list), 'Array')
   return list.map(fn, list)
 })
 export const filter = curry(function(fn, list) {
-  assert.equals(type(fn), 'Function')
-  assert.equals(type(list), 'Array')
+  assert.equal(type(fn), 'Function')
+  assert.equal(type(list), 'Array')
   return list.filter(fn, list)
 })
 
 const invoke = function(v, fn) {
-  assert.equals(type(fn), 'Function')
+  assert.equal(type(fn), 'Function')
   return fn(v)
 }
+
 export const compose = function(...fns) {
   // should be array of unairy functions
   map(function(fn) {
-    return assert.equals(type(fn))
+    return assert.equal(type(fn), 'Function')
   }, fns)
 
   return function(v) {
@@ -81,65 +82,68 @@ export const compose = function(...fns) {
 
 export const concat = function(...arrs) {
   map(function(arr) {
-    return assert.equals(type(arr), 'Array')
+    return assert.equal(type(arr), 'Array')
   }, arrs)
 
   return reduce((a, b) => [...a, ...b], [], arrs)
 }
 
 export const path = curry(function(keys, obj) {
-  assert.equals(type(keys), 'Array')
-  assert.equals(type(obj), 'Object')
-  return reduce((o, p) => o[p], obj, keys))
-}
+  assert.equal(type(keys), 'Array')
+  assert.equal(type(obj), 'Object')
+  return reduce((o, p) => o[p], obj, keys)
+})
 
-export const pluck = curry( function(key, list) {
-  assert.equals(type(key), 'String')
-  assert.equals(type(list), 'Array')
-  return map(prop(key), list))
-}
+export const pluck = curry(function(key, list) {
+  assert.equal(type(key), 'String')
+  assert.equal(type(list), 'Array')
+
+  return map(prop(key), list)
+})
 
 export const contains = curry(function(exp, source) {
-  assert.equals(type(source), 'String')
+  assert.equal(type(source), 'String')
   const reg = new RegExp(`${exp}`, 'i')
   return reg.test(source)
 })
+
 export const noop = () => null
 // declarative expression for true && <h1>Beep</h1>
 export const asif = curry(function(compare, success) {
+  assert.equal(type(compare), 'Function')
+  assert.equal(type(success), 'Function')
+
   return function(...args) {
-    return compare.apply(null, args) ? success.apply(null, args) : null
+    return compare(...args) ? success(...args) : null
   }
 })
 // ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
 
 export const ifElse = curry(function(compare, success, failure) {
-  assert.equals(type(compare), 'Function')
-  assert.equals(type(success), 'Function')
-  assert.equals(type(failure), 'Function')
+  assert.equal(type(compare), 'Function')
+  assert.equal(type(success), 'Function')
+  assert.equal(type(failure), 'Function')
 
   return function(...args) {
-    return compare(...args)
-      ? success(...args)
-      : failure(...args)
+    return compare(...args) ? success(...args) : failure(...args)
   }
 })
 
 export const merge = function(...objs) {
-  map(function (o) {
-    assert.equals(type(o), 'Object')
+  map(function(o) {
+    assert.equal(type(o), 'Object')
   }, objs)
   return Object.assign(...objs)
 }
-export const keys = function (obj) {
-  assert.equals(type(obj), 'Object')
+export const keys = function(obj) {
+  assert.equal(type(obj), 'Object')
   return Object.keys(obj)
 }
 
-export const assoc = function (k, v, obj) {
-  assert.equals(type(obj), 'Object')
-  assert.equals(type(k), 'String')
-  
+export const assoc = function(k, v, obj) {
+  assert.equal(type(obj), 'Object')
+  assert.equal(type(k), 'String')
+
   return merge(obj, { [k]: v })
 }
 // export const lens = curry((getter, setter) => {
@@ -160,19 +164,19 @@ function _arity(n, fn) {
   switch (n) {
     case 0:
       return function() {
-        return fn.apply(null, arguments)
+        return fn(...arguments)
       }
     case 1:
       return function(a0) {
-        return fn.apply(null, arguments)
+        return fn(...arguments)
       }
     case 2:
       return function(a0, a1) {
-        return fn.apply(null, arguments)
+        return fn(...arguments)
       }
     case 3:
       return function(a0, a1, a2) {
-        return fn.apply(null, arguments)
+        return fn(...arguments)
       }
 
     default:
@@ -183,13 +187,13 @@ function _arity(n, fn) {
 }
 function _curry(length, received, fn) {
   if (length === received.length) {
-    return fn.apply(null, received)
+    return fn(...received)
   }
   return function(...args) {
     const combined = received.concat(args)
     const left = length - combined.length
     return left <= 0
-      ? fn.apply(null, combined)
+      ? fn(...combined)
       : _arity(left, _curry(length, combined, fn))
   }
 }
