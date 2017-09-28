@@ -72,3 +72,32 @@ filter(isOdd, [1,2,3,4,5]) // [1,3,5]
 ```
 
 ---
+
+## compose
+
+### What does it do?
+
+`compose`
+
+### How do I use it?
+
+`compose`
+
+### Usage
+
+``` js
+const composeExampleFunc = _ => {
+  const numbers = [1, 2, 4, 8, 16, 32]
+  const square = R.map(x => x * x)
+  const divByEight = R.filter(x => x % 8 ===0)
+  const red = R.reduce((accu,value)=> accu+1,0)
+
+  return R.compose(
+    red,
+    divByEight,
+    square
+  )(numbers)
+} // [output]
+```
+
+---
