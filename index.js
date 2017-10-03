@@ -10,7 +10,7 @@ const verify = function(a, b, name) {
 *  For more information visit:
 *
 *  https://github.com/twilson63/nanofp/blob/master/docs.md#${name ||
-    'undefined'}
+      'undefined'}
 *
 *************************************************************
 `)
@@ -21,16 +21,16 @@ const verify = function(a, b, name) {
 export const curry = function(fn) {
   verify(typeof fn, 'function', 'curry')
   return function(...args) {
-  return _curry(fn.length, args, fn)
+    return _curry(fn.length, args, fn)
   }
 }
 
 export const type = curry(function type(val) {
   return val === null
-  ? 'Null'
-  : val === undefined
-    ? 'Undefined'
-    : Object.prototype.toString.call(val).slice(8, -1)
+    ? 'Null'
+    : val === undefined
+      ? 'Undefined'
+      : Object.prototype.toString.call(val).slice(8, -1)
 })
 
 export const and = curry((a, b) => a && b)
@@ -53,7 +53,7 @@ export const identity = function(v) {
 export const always = function(v) {
   verify(isNil(v), false, 'always')
   return function() {
-  return v
+    return v
   }
 }
 
@@ -90,17 +90,17 @@ const invoke = function(v, fn) {
 export const compose = function(...fns) {
   // should be array of unairy functions
   map(function(fn) {
-  return verify(type(fn), 'Function', 'compose')
+    return verify(type(fn), 'Function', 'compose')
   }, fns)
 
   return function(v) {
-  return reduce(invoke, v, fns.reverse())
+    return reduce(invoke, v, fns.reverse())
   }
 }
 
 export const concat = function(...arrs) {
   map(function(arr) {
-  return verify(type(arr), 'Array', 'concat')
+    return verify(type(arr), 'Array', 'concat')
   }, arrs)
 
   return reduce((a, b) => [...a, ...b], [], arrs)
@@ -132,7 +132,7 @@ export const asif = curry(function(compare, success) {
   verify(type(success), 'Function', 'asif')
 
   return function(...args) {
-  return compare(...args) ? success(...args) : null
+    return compare(...args) ? success(...args) : null
   }
 })
 // ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
@@ -143,7 +143,7 @@ export const ifElse = curry(function(compare, success, failure) {
   verify(type(failure), 'Function', 'ifElse')
 
   return function(...args) {
-  return compare(...args) ? success(...args) : failure(...args)
+    return compare(...args) ? success(...args) : failure(...args)
   }
 })
 
@@ -151,7 +151,7 @@ export const merge = function(...objs) {
   map(function(o) {
   verify(type(o), 'Object', 'merge')
   }, objs)
-  return Object.assign(...objs)
+    return Object.assign(...objs)
 }
 
 export const keys = function(obj) {
@@ -168,7 +168,7 @@ export const assoc = function(k, v, obj) {
   verify(type(obj), 'Object', 'assoc')
   verify(type(k), 'String', 'assoc')
 
-  return merge(obj, {
+    return merge(obj, {
   [k]: v
   })
 }
@@ -204,35 +204,35 @@ export const all = function(fn, list) {
 
 function _arity(n, fn) {
   switch (n) {
-  case 0:
-    return function() {
-    return fn(...arguments)
-    }
-  case 1:
-    return function(a0) {
-    return fn(...arguments)
-    }
-  case 2:
-    return function(a0, a1) {
-    return fn(...arguments)
-    }
-  case 3:
-    return function(a0, a1, a2) {
-    return fn(...arguments)
-    }
+    case 0:
+      return function() {
+        return fn(...arguments)
+      }
+    case 1:
+      return function(a0) {
+        return fn(...arguments)
+      }
+    case 2:
+      return function(a0, a1) {
+        return fn(...arguments)
+      }
+    case 3:
+      return function(a0, a1, a2) {
+        return fn(...arguments)
+      }
 
-  default:
-    throw new Error(
-    'First argument to _arity function must be a non-negative integer no greater than four'
-    )
-  }
+    default:
+      throw new Error(
+      'First argument to _arity function must be a non-negative integer no greater than four'
+      )
+    }
 }
 
 function _curry(length, received, fn) {
   if (length === received.length) {
-  return fn(...received)
+    return fn(...received)
   }
-  return function(...args) {
+    return function(...args) {
   const combined = received.concat(args)
   const left = length - combined.length
   return left <= 0

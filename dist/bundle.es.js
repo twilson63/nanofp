@@ -204,9 +204,9 @@ var all = function all(fn, list) {
 };
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
-//   return target => {
-//     return map(focus => setter(focus, target), toFunctorFn(getter(target)))
-//   }
+//    return target => {
+//       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
+//    }
 //   }
 // })
 // export const lensProp = k => noop
