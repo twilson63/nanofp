@@ -1,3 +1,4 @@
+/* jshint esversion: 6, asi: true */
 import { asif, equals, identity } from '../'
 import test from 'tape'
 

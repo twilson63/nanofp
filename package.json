@@ -10,6 +10,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-tape-runner": "^2.0.1",
     "faucet": "^0.0.1",
+    "jsverify": "^0.8.3",
     "number-to-words": "^1.2.3",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",

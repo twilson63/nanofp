@@ -64,6 +64,10 @@ export const prop = curry(function(p, obj) {
   return obj[p]
 })
 
+export const all = curry((fn, arr) =>
+  equals(prop('length', filter(fn, arr)), prop('length', arr))
+)
+
 export const reduce = curry(function(fn, v, list) {
   verify(type(fn), 'Function', 'reduce')
   verify(type(list), 'Array', 'reduce')

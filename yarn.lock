@@ -1511,6 +1511,15 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jsverify@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/jsverify/-/jsverify-0.8.3.tgz#02e9178e1924b5aaf959c0239af84ed5c6d0738c"
+  dependencies:
+    lazy-seq "^1.0.0"
+    rc4 "~0.1.5"
+    trampa "^1.0.0"
+    typify-parser "^1.1.0"
+
 kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -1522,6 +1531,10 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+lazy-seq@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lazy-seq/-/lazy-seq-1.0.0.tgz#880cb8aab256026382e02f53ec089682a74c5b6a"
 
 level-blobs@^0.1.7:
   version "0.1.7"
@@ -1905,6 +1918,10 @@ randombytes@^2.0.0, randombytes@^2.0.1:
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.0.5.tgz#dc009a246b8d09a177b4b7a0ae77bc570f4b1b79"
   dependencies:
     safe-buffer "^5.1.0"
+
+rc4@~0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/rc4/-/rc4-0.1.5.tgz#08c6e04a0168f6eb621c22ab6cb1151bd9f4a64d"
 
 rc@^1.1.7:
   version "1.2.1"
@@ -2318,6 +2335,10 @@ tough-cookie@~2.3.2:
   dependencies:
     punycode "^1.4.1"
 
+trampa@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/trampa/-/trampa-1.0.0.tgz#5247347ac334807fa6c0000444cb91b639840ad5"
+
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
@@ -2339,6 +2360,10 @@ typedarray-to-buffer@~1.0.0:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typify-parser@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/typify-parser/-/typify-parser-1.1.0.tgz#ac73bfa5f25343468e2d0f3346c6117bc03d3c99"
 
 uid-number@^0.0.6:
   version "0.0.6"

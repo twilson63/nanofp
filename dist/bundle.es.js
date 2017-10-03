@@ -63,6 +63,10 @@ var prop = curry(function (p, obj) {
   return obj[p];
 });
 
+var all = curry(function (fn, arr) {
+  return equals(prop('length', filter(fn, arr)), prop('length', arr));
+});
+
 var reduce = curry(function (fn, v, list) {
   verify(type(fn), 'Function', 'reduce');
   verify(type(list), 'Array', 'reduce');
@@ -240,4 +244,4 @@ function _curry(length, received, fn) {
   };
 }
 
-export { curry, type, and, or, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc };
+export { curry, type, and, or, isNil, not, identity, always, equals, prop, all, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc };
