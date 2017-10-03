@@ -191,11 +191,26 @@ var assoc = function assoc(k, v, obj) {
 
   return merge(obj, _defineProperty({}, k, v));
 };
+
+var add = function add(a, b) {
+  return Number(a) + Number(b);
+};
+
+var all = function all(fn, list) {
+  var idx = 0;
+  while (idx < list.length) {
+    if (not(fn(list[idx]))) {
+      return false;
+    }
+    idx++;
+  }
+  return true;
+};
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
-//     return target => {
-//       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
-//     }
+  //   return target => {
+  //     return map(focus => setter(focus, target), toFunctorFn(getter(target)))
+  //   }
 //   }
 // })
 // export const lensProp = k => noop
@@ -269,3 +284,5 @@ exports.merge = merge;
 exports.keys = keys;
 exports.values = values;
 exports.assoc = assoc;
+exports.add = add;
+exports.all = all;

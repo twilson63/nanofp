@@ -187,11 +187,26 @@ var assoc = function assoc(k, v, obj) {
 
   return merge(obj, _defineProperty({}, k, v));
 };
+
+var add = function add(a, b) {
+  return Number(a) + Number(b);
+};
+
+var all = function all(fn, list) {
+  var idx = 0;
+  while (idx < list.length) {
+    if (not(fn(list[idx]))) {
+      return false;
+    }
+    idx++;
+  }
+  return true;
+};
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
-//     return target => {
+//    return target => {
 //       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
-//     }
+//    }
 //   }
 // })
 // export const lensProp = k => noop
@@ -240,4 +255,4 @@ function _curry(length, received, fn) {
   };
 }
 
-export { curry, type, and, or, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc };
+export { curry, type, and, or, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc, add, all };

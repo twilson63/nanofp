@@ -1,7 +1,7 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.nanofp = {})));
+      typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+      typeof define === 'function' && define.amd ? define(['exports'], factory) :
+      (factory((global.nanofp = {})));
 }(this, (function (exports) { 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -193,11 +193,26 @@ var assoc = function assoc(k, v, obj) {
 
   return merge(obj, _defineProperty({}, k, v));
 };
+
+var add = function add(a, b) {
+  return Number(a) + Number(b);
+};
+
+var all = function all(fn, list) {
+  var idx = 0;
+  while (idx < list.length) {
+    if (not(fn(list[idx]))) {
+      return false;
+    }
+    idx++;
+  }
+  return true;
+};
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
-//     return target => {
-//       return map(focus => setter(focus, target), toFunctorFn(getter(target)))
-//     }
+//   return target => {
+//     return map(focus => setter(focus, target), toFunctorFn(getter(target)))
+//   }
 //   }
 // })
 // export const lensProp = k => noop
@@ -271,6 +286,8 @@ exports.merge = merge;
 exports.keys = keys;
 exports.values = values;
 exports.assoc = assoc;
+exports.add = add;
+exports.all = all;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
