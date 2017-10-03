@@ -191,6 +191,17 @@ var assoc = function assoc(k, v, obj) {
 var add = function add(a, b) {
     return Number(a) + Number(b);
 };
+
+var all = function all(fn, list) {
+    var idx = 0;
+    while (idx < list.length) {
+        if (not(fn(list[idx]))) {
+            return false;
+        }
+        idx++;
+    }
+    return true;
+};
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
 //     return target => {
@@ -244,4 +255,4 @@ function _curry(length, received, fn) {
     };
 }
 
-export { curry, type, and, or, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc, add };
+export { curry, type, and, or, isNil, not, identity, always, equals, prop, reduce, map, filter, compose, concat, path, pluck, contains, noop, asif, ifElse, merge, keys, values, assoc, add, all };

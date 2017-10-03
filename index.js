@@ -174,7 +174,19 @@ export const assoc = function(k, v, obj) {
 }
 
 export const add = function(a, b) {
-        return Number(a) + Number(b)
+    return Number(a) + Number(b)
+}
+
+export const all = function(fn, list) {
+        // const idx cause error during build, Error:"idx" is read-only
+        let idx = 0
+        while (idx < list.length) {
+            if (not(fn(list[idx]))) {
+                return false
+            }
+            idx++
+        }
+        return true
     }
     // export const lens = curry((getter, setter) => {
     //   return toFunctorFn => {

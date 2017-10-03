@@ -195,6 +195,17 @@ var assoc = function assoc(k, v, obj) {
 var add = function add(a, b) {
     return Number(a) + Number(b);
 };
+
+var all = function all(fn, list) {
+    var idx = 0;
+    while (idx < list.length) {
+        if (not(fn(list[idx]))) {
+            return false;
+        }
+        idx++;
+    }
+    return true;
+};
 // export const lens = curry((getter, setter) => {
 //   return toFunctorFn => {
 //     return target => {
@@ -274,3 +285,4 @@ exports.keys = keys;
 exports.values = values;
 exports.assoc = assoc;
 exports.add = add;
+exports.all = all;
