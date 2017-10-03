@@ -1,6 +1,6 @@
 const verify = function(a, b, name) {
   if (a !== b) {
-  throw new Error(`
+    throw new Error(`
 *************************************************************
 * nanofp Error: Invalid argument for the function ${name || 'undefined'}
 *************************************************************
@@ -149,9 +149,9 @@ export const ifElse = curry(function(compare, success, failure) {
 
 export const merge = function(...objs) {
   map(function(o) {
-  verify(type(o), 'Object', 'merge')
+    verify(type(o), 'Object', 'merge')
   }, objs)
-    return Object.assign(...objs)
+  return Object.assign(...objs)
 }
 
 export const keys = function(obj) {
@@ -168,8 +168,8 @@ export const assoc = function(k, v, obj) {
   verify(type(obj), 'Object', 'assoc')
   verify(type(k), 'String', 'assoc')
 
-    return merge(obj, {
-  [k]: v
+  return merge(obj, {
+    [k]: v
   })
 }
 
@@ -181,10 +181,10 @@ export const all = function(fn, list) {
   // const idx cause error during build, Error:"idx" is read-only
   let idx = 0
   while (idx < list.length) {
-  if (not(fn(list[idx]))) {
-    return false
-  }
-  idx++
+    if (not(fn(list[idx]))) {
+      return false
+    }
+    idx++
   }
   return true
 }
@@ -223,20 +223,20 @@ function _arity(n, fn) {
 
     default:
       throw new Error(
-      'First argument to _arity function must be a non-negative integer no greater than four'
+        'First argument to _arity function must be a non-negative integer no greater than four'
       )
-    }
+  }
 }
 
 function _curry(length, received, fn) {
   if (length === received.length) {
     return fn(...received)
   }
-    return function(...args) {
-  const combined = received.concat(args)
-  const left = length - combined.length
-  return left <= 0
-    ? fn(...combined)
-    : _arity(left, _curry(length, combined, fn))
+  return function(...args) {
+    const combined = received.concat(args)
+    const left = length - combined.length
+    return left <= 0
+      ? fn(...combined)
+      : _arity(left, _curry(length, combined, fn))
   }
 }
