@@ -225,7 +225,7 @@ function _arity(n, fn) {
       throw new Error(
         'First argument to _arity function must be a non-negative integer no greater than four'
       )
-  }
+    }
 }
 
 function _curry(length, received, fn) {
