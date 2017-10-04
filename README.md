@@ -34,6 +34,12 @@ MIT
 
 Pull Requests are welcome
 
+Use EditorConfig to make sure you use the correct editor formatting:
+
+spaces 2 space indention.
+
+Also, this project uses prettifier and airbnb as its linter without semis.
+
 ## Thank You
 
 * JavaScript Community

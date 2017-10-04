@@ -25,13 +25,14 @@ export const curry = function(fn) {
   }
 }
 
-export const type = curry(function type(val) {
-  return val === null
-    ? 'Null'
-    : val === undefined
-      ? 'Undefined'
-      : Object.prototype.toString.call(val).slice(8, -1)
-})
+export const type = curry(
+  val =>
+    val === null
+      ? 'Null'
+      : val === undefined
+        ? 'Undefined'
+        : Object.prototype.toString.call(val).slice(8, -1)
+)
 
 export const and = curry((a, b) => a && b)
 export const or = curry((a, b) => a || b)
@@ -58,7 +59,7 @@ export const always = function(v) {
 }
 
 export const equals = curry((a, b) => a === b)
-export const prop = curry(function(p, obj) {
+export const prop = curry((p, obj) => {
   verify(type(p), 'String', 'prop')
   verify(type(obj), 'Object', 'prop')
   return obj[p]
@@ -68,19 +69,19 @@ export const all = curry((fn, arr) =>
   equals(prop('length', filter(fn, arr)), prop('length', arr))
 )
 
-export const reduce = curry(function(fn, v, list) {
+export const reduce = curry((fn, v, list) => {
   verify(type(fn), 'Function', 'reduce')
   verify(type(list), 'Array', 'reduce')
 
   return list.reduce(fn, v)
 })
 
-export const map = curry(function(fn, list) {
+export const map = curry((fn, list) => {
   verify(type(fn), 'Function', 'map')
   verify(type(list), 'Array', 'map')
   return list.map(fn, list)
 })
-export const filter = curry(function(fn, list) {
+export const filter = curry((fn, list) => {
   verify(type(fn), 'Function', 'filter')
   verify(type(list), 'Array', 'filter')
   return list.filter(fn, list)
@@ -93,9 +94,7 @@ const invoke = function(v, fn) {
 
 export const compose = function(...fns) {
   // should be array of unairy functions
-  map(function(fn) {
-    return verify(type(fn), 'Function', 'compose')
-  }, fns)
+  map(fn => verify(type(fn), 'Function', 'compose'), fns)
 
   return function(v) {
     return reduce(invoke, v, fns.reverse())
@@ -103,27 +102,25 @@ export const compose = function(...fns) {
 }
 
 export const concat = function(...arrs) {
-  map(function(arr) {
-    return verify(type(arr), 'Array', 'concat')
-  }, arrs)
+  map(arr => verify(type(arr), 'Array', 'concat'), arrs)
 
   return reduce((a, b) => [...a, ...b], [], arrs)
 }
 
-export const path = curry(function(keys, obj) {
+export const path = curry((keys, obj) => {
   verify(type(keys), 'Array', 'path')
   verify(type(obj), 'Object', 'path')
   return reduce((o, p) => o[p], obj, keys)
 })
 
-export const pluck = curry(function(key, list) {
+export const pluck = curry((key, list) => {
   verify(type(key), 'String', 'pluck')
   verify(type(list), 'Array', 'pluck')
 
   return map(prop(key), list)
 })
 
-export const contains = curry(function(exp, source) {
+export const contains = curry((exp, source) => {
   verify(type(source), 'String', 'contains')
   const reg = new RegExp(`${exp}`, 'i')
   return reg.test(source)
@@ -131,7 +128,7 @@ export const contains = curry(function(exp, source) {
 
 export const noop = () => null
 // declarative expression for true && <h1>Beep</h1>
-export const asif = curry(function(compare, success) {
+export const asif = curry((compare, success) => {
   verify(type(compare), 'Function', 'asif')
   verify(type(success), 'Function', 'asif')
 
@@ -141,7 +138,7 @@ export const asif = curry(function(compare, success) {
 })
 // ifThen(equals('Beep'), (v) => <h1>{v}</h1>)(this.state.foo)
 
-export const ifElse = curry(function(compare, success, failure) {
+export const ifElse = curry((compare, success, failure) => {
   verify(type(compare), 'Function', 'ifElse')
   verify(type(success), 'Function', 'ifElse')
   verify(type(failure), 'Function', 'ifElse')
@@ -152,7 +149,7 @@ export const ifElse = curry(function(compare, success, failure) {
 })
 
 export const merge = function(...objs) {
-  map(function(o) {
+  map(o => {
     verify(type(o), 'Object', 'merge')
   }, objs)
   return Object.assign(...objs)
