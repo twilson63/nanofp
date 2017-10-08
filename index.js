@@ -1,30 +1,30 @@
 const fillChar = (char, len) => {
-  var str = "";
+  var str = ""
   for (var i = 0; i < len; i++) {
-    str += char;
+    str += char
   }
-  return str;
+  return str
 };
 
 const wrapString = (str, maxLength, innerChar, outerChar, newLine) => {
-  const checkStr = str || innerChar;
-  const maxLen = maxLength - outerChar.length * 2 - innerChar.length * 2;
-  const nl = newLine ? "\n" : "";
+  const checkStr = str || innerChar
+  const maxLen = maxLength - outerChar.length * 2 - innerChar.length * 2
+  const nl = newLine ? "\n" : ""
   
   var strArr = [];
   for (var i = 0; i < Math.ceil(checkStr.length / maxLen); i++) {
-    strArr.push(checkStr.substr(i * maxLen, maxLen).trim());
-    strArr[i] = (i !== 0 ? "\n" : "") + outerChar + innerChar + strArr[i] + fillChar(innerChar, maxLen - strArr[i].length) + innerChar + outerChar;
+    strArr.push(checkStr.substr(i * maxLen, maxLen).trim())
+    strArr[i] = (i !== 0 ? "\n" : "") + outerChar + innerChar + strArr[i] + fillChar(innerChar, maxLen - strArr[i].length) + innerChar + outerChar
   }
   
-  return strArr.join("") + nl;
+  return strArr.join("") + nl
 };
 
 const verify = function(a, b, name) {
   const outerChar = "*"
   const innerChar = " "
-  const linkStr = `https://github.com/twilson63/nanofp/blob/master/docs.md#${name || 'undefined'}`;
-  const w = linkStr.length + outerChar.length * 2 + innerChar.length * 2;
+  const linkStr = `https://github.com/twilson63/nanofp/blob/master/docs.md#${name || 'undefined'}`
+  const w = linkStr.length + outerChar.length * 2 + innerChar.length * 2
   
   if (a !== b) {
     throw new Error(
