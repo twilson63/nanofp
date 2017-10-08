@@ -1,19 +1,45 @@
+const fillChar = (char, len) => {
+  var str = "";
+  for (var i = 0; i < len; i++) {
+    str += char;
+  }
+  return str;
+};
+
+const wrapString = (str, maxLength, innerChar, outerChar, newLine) => {
+  const checkStr = str || innerChar;
+  const maxLen = maxLength - outerChar.length * 2 - innerChar.length * 2;
+  const nl = newLine ? "\n" : "";
+  
+  var strArr = [];
+  for (var i = 0; i < Math.ceil(checkStr.length / maxLen); i++) {
+    strArr.push(checkStr.substr(i * maxLen, maxLen).trim());
+    strArr[i] = (i !== 0 ? "\n" : "") + outerChar + innerChar + strArr[i] + fillChar(innerChar, maxLen - strArr[i].length) + innerChar + outerChar;
+  }
+  
+  return strArr.join("") + nl;
+};
+
 const verify = function(a, b, name) {
+  const outerChar = "*"
+  const innerChar = " "
+  const linkStr = `https://github.com/twilson63/nanofp/blob/master/docs.md#${name || 'undefined'}`;
+  const w = linkStr.length + outerChar.length * 2 + innerChar.length * 2;
+  
   if (a !== b) {
-    throw new Error(`
-*************************************************************
-* nanofp Error: Invalid argument for the function ${name || 'undefined'}
-*************************************************************
-*  It looks like you may have passed an invalid argument
-*  This function was looking for a input of type ${b}
-*
-*  For more information visit:
-*
-*  https://github.com/twilson63/nanofp/blob/master/docs.md#${name ||
-      'undefined'}
-*
-*************************************************************
-`)
+    throw new Error(
+      wrapString(outerChar, w, outerChar, outerChar, true) +
+      wrapString(`nanofp Error: Invalid argument for the function ${name || 'undefined'}`, w, innerChar, outerChar, true) +
+      wrapString(outerChar, w, outerChar, outerChar, true) +
+      wrapString(`It looks like you may have passed an invalid argument`, w, innerChar, outerChar, true) +
+      wrapString(`This function was looking for an input of type ${b}`, w, innerChar, outerChar, true) +
+      wrapString(innerChar, w, innerChar, outerChar, true) +
+      wrapString(`For more information visit:`, w, innerChar, outerChar, true) +
+      wrapString(innerChar, w, innerChar, outerChar, true) +
+      wrapString(linkStr, w, innerChar, outerChar, true) +
+      wrapString(innerChar, w, innerChar, outerChar, true) +
+      wrapString(outerChar, w, outerChar, outerChar, false)
+    )
   }
   return undefined
 }
