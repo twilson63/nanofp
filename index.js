@@ -4,7 +4,7 @@ const fillChar = (char, len) => {
     str += char
   }
   return str
-};
+}
 
 const wrapString = (str, maxLength, innerChar, outerChar, newLine) => {
   const checkStr = str || innerChar
@@ -18,7 +18,7 @@ const wrapString = (str, maxLength, innerChar, outerChar, newLine) => {
   }
   
   return strArr.join("") + nl
-};
+}
 
 const verify = function(a, b, name) {
   const outerChar = "*"
